@@ -5,7 +5,7 @@ def calculateIC(text):
     alphabet = dict.fromkeys(string.ascii_lowercase, 0)
 
     # Remove spaces from string and convert to lowercase
-    text = text.strip().lower()
+    text = text.replace(" ", "").lower()
 
     # Loop through string and count letters
     for key in alphabet:
