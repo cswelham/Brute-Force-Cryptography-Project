@@ -1,4 +1,4 @@
-from IC_Calculator import calculateIC
+from ICCalculator import calculateIC
 
 # Calculates the permutation period p
 def calculateP(text):
