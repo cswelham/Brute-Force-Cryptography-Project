@@ -1,4 +1,4 @@
-class Vigenere_Cypher():
+class Vigenere_Cipher():
 
     def keyLengthAdjuster(self, key, messageLength):
         lengthKey = len(key)
@@ -60,13 +60,13 @@ while(True):
     if choice == 'encrypt':
         message = input("Enter message: ").lower()
         key = input("Enter key: ").lower()
-        cipher = Vigenere_Cypher()
+        cipher = Vigenere_Cipher()
         encryptedMessage = cipher.encrypt(key, message)
         print(encryptedMessage)
     elif choice == 'decrypt':
         message = input("Enter message: ").lower()
         key = input("Enter key (if you have one): ").lower()
-        cipher = Vigenere_Cypher()
+        cipher = Vigenere_Cipher()
         decryptedMessage = cipher.decrypt(key, message)
         print(decryptedMessage)
     elif choice == 'exit':
