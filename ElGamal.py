@@ -24,16 +24,16 @@ def encodeElGamal():
     recieverKey =  int(input("What is the reciever's Public Key: ")) # get the public key of the reciever
         
     K = (recieverKey**secretk) % prime # determine K
-    aK = (base**secretk) %prime # determine aK
+    ak = (base**secretk) %prime # determine aK
     Km = (K*message) %prime # determine Km
     
     #output the values, for debugging
     print("K: "+str(K))
-    print("aK: "+str(aK))
+    print("ak: "+str(ak))
     print("Km: "+str(Km))
 
     #output the pair of values for the cipher text
-    print("Cipher Text: " + str(aK) +" "+ str(Km))
+    print("Cipher Text: " + str(ak) +" "+ str(Km))
 
 
 
@@ -42,35 +42,32 @@ def decodeElGamal():
     global base
     global prime
     global discreteLogs
-    aK = int(input("What is the first part of the cipher text : ")) #get the first part of the cipher text
+    ak = int(input("What is the first part of the cipher text : ")) #get the first part of the cipher text
     Km =  int(input("What is the second part of the cipher text : ")) # get the second part of the cipher text
+    recieverKey = int(input("What is the reciever's public key : "))
     
     #determine the private number
     privateNum =0
 
     #for each value in the table of logs
     for i in range(len(discreteLogs)):
-        if i==aK: # get the location of the value that matches aK 
-            privateNum=i # index value is the private value of the reciever
+        if discreteLogs[i]==recieverKey: # get the location of the value that matches ak 
+            privateNum=i+1 # index value is the private value of the reciever
             break
 
-    print("Private Number :" + str(privateNum)) #print the private number, for debugging
+    print("Reciever Private k:" + str(privateNum))
     
+    K = (ak **privateNum) % prime
 
-    
-    K = (aK ** privateNum) % prime #use the private number to determine the value of K
-    
     print("K: "+ str(K))  #print the value of K, for debugging
-
-    
     inverseK = pow(K, prime-2, prime) # calculate the inverse of K modulo the prime
-
     
     print("K^-1: "+str(inverseK)) #print the value of K inverse, for debugging
    
     message = (inverseK * Km) % prime  # use K inverse to decrypt the message
    
     print("Original Message is: "+str(message))  #print the decrypted message
+
 
 
 
