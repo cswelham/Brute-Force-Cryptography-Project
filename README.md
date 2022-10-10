@@ -11,7 +11,7 @@
               
 The COMPX502 Group Project is a computer program which can be used to both encrypt and decrypt messages involving the examples of cryptosystems that have been introduced in the course. 
 
-Our computer program is written in *python* and has command line functionality. 
+Our computer program is written in *python* and has command line functionality. To use the program, run the main_driver.py file and follow the prompts. 
 
 Our computer program implements the following cryptosystems:
    - ElGamel
