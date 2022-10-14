@@ -6,6 +6,8 @@ import random
 # Encrypt a message with a specific number of rounds
 def encryptFeistel(message, rounds, keys):
 
+    print('')
+    print('Encryption Steps')
     # For each round
     for i in range(rounds):
         # Split message
@@ -32,6 +34,15 @@ def encryptFeistel(message, rounds, keys):
 
         # Set the new message
         message = left + right
+
+        # Get the function order for output
+        new = ""
+        if (keys[i][0] != "REVERSE"):
+            for j in range(len(keys[i][1])):
+                new = new + message[keys[i][1][j]]
+            print("L: " + left + " R: XOR(" + leftPrev + ",  Function(" + keys[i][0] + ", " + leftPrev + ", " + new + "))")
+        else:
+            print("L: " + left + " R: XOR(" + leftPrev + ",  Function(" + keys[i][0] + ", " + leftPrev + "))")
         
     # Swap left and right around
     left, right = message[:len(message)//2], message[len(message)//2:]
@@ -39,7 +50,8 @@ def encryptFeistel(message, rounds, keys):
 
 # Decrypt a message with a specific number of rounds
 def decryptFeistel(message, rounds, keys):
-    
+
+    print('Decryption Steps')
     # For each round
     for i in range(rounds):
         # Split message
@@ -66,6 +78,15 @@ def decryptFeistel(message, rounds, keys):
 
         # Set the new message
         message = left + right
+
+        # Get the function order for output
+        new = ""
+        if (keys[i][0] != "REVERSE"):
+            for j in range(len(keys[i][1])):
+                new = new + message[keys[i][1][j]]
+            print("L: " + left + " R: XOR(" + leftPrev + ",  Function(" + keys[i][0] + ", " + leftPrev + ", " + new + "))")
+        else:
+            print("L: " + left + " R: XOR(" + leftPrev + ",  Function(" + keys[i][0] + ", " + leftPrev + "))")
         
     # Swap left and right around
     left, right = message[:len(message)//2], message[len(message)//2:]
@@ -189,8 +210,10 @@ if __name__ == "__main__":
         print('')
 
         # Decrypt message
+        decrypt = decryptFeistel(str(encrypt), int(rounds), keys[::-1])
+        print('')
         print('Decrypted Message:')
-        print(decryptFeistel(str(encrypt), int(rounds), keys[::-1]))
+        print(decrypt)
         print('')
             
         
