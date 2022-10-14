@@ -9,9 +9,9 @@
   - Reece Brown
   - Bevan Muirhead
               
-The COMPX502 Group Project is a computer program which can be used to both encrypt and decrypt messages involving the examples of cryptosystems that have been introduced in the course. 
+The COMPX502 Group Project is a computer program which can be used to both encrypt and decrypt messages involving the examples of cryptosystems built on number theory and other information theory tools and techniques which have been introduced in the course. 
 
-Our computer program is written in *python* and has command line functionality. To use the program, run the main_driver.py file and follow the prompts. 
+Our computer program is written in *python*. To use the program, run the main_driver.py file and follow the prompts. The user will be asked for prompted to provide input, allowing the program to decide whether to encrypt or decrypt a provided text, and then decide which cryptosystem to use.  
 
 Our computer program implements the following cryptosystems:
    - ElGamel
@@ -25,3 +25,7 @@ And the program also includes other features:
    - Index of Coincidence Calculator
    - Letter Frequency Calculator
    - Discrete Logarithm Calculator
+   - Integer Factorisation
+   - Permutation Calculator
+
+These features help to support and work with the listed crptosystems which encrypt and decrypt provided texts by providing intelligent analysis and insights. 
