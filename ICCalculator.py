@@ -1,11 +1,13 @@
+from RemoveSpacesCapitals import removeSpacesCapitals
+
 # Calculates the index of coincidence
 def calculateIC(text):
+
+    text = removeSpacesCapitals(text)
+    
     # Dictionary of alphabet with counts of 0
     import string
     alphabet = dict.fromkeys(string.ascii_lowercase, 0)
-
-    # Remove spaces from string and convert to lowercase
-    text = text.replace(" ", "").lower()
 
     # Loop through string and count letters
     for key in alphabet:

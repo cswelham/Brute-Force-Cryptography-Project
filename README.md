@@ -14,7 +14,7 @@ The COMPX502 Group Project is a computer program which can be used to both encry
 Our computer program is written in *python*. To use the program, run the main_driver.py file and follow the prompts. The user will be asked for prompted to provide input, allowing the program to decide whether to encrypt or decrypt a provided text, and then decide which cryptosystem to use.  
 
 Our computer program implements the following cryptosystems:
-   - ElGamel
+   - ElGamal
    - Vigenere Cipher
    - Feistel Cipher
    - R.S.A.
@@ -26,6 +26,7 @@ And the program also includes other features:
    - Letter Frequency Calculator
    - Discrete Logarithm Calculator
    - Integer Factorisation
-   - Permutation Calculator
+   - Periodicity Finder
+   - Removal of Spaces and/or Capitals
 
 These features help to support and work with the listed crptosystems which encrypt and decrypt provided texts by providing intelligent analysis and insights. 

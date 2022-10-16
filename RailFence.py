@@ -1,5 +1,9 @@
+from RemoveSpacesCapitals import removeSpacesCapitals
+
 # Encrypt a message with a key
 def encryptRF(string, key):
+
+    string = removeSpacesCapitals(string)
     
     # Create the matrix
     matrix = [[''] * len(string) for i in range(key)]
@@ -50,6 +54,8 @@ def encryptRF(string, key):
      
 # Decrypt cyphertext with a key
 def decryptRF(cypher, key):
+
+    cypher = removeSpacesCapitals(cypher)
  
     # Create the matrix
     matrix = [[''] * len(string) for i in range(key)]
