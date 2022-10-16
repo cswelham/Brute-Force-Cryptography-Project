@@ -30,3 +30,8 @@ And the program also includes other features:
    - Removal of Spaces and/or Capitals
 
 These features help to support and work with the listed crptosystems which encrypt and decrypt provided texts by providing intelligent analysis and insights. 
+
+### System Requirements
+
+To execute this computer program, you must have Python3 or a later version of Python installed, as well as pip. 
+You can install pip onto your machine (Linux) using the following command: `sudo apt install python3-pip`
