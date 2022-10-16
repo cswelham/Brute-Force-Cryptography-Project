@@ -62,54 +62,136 @@ def generate_key_pair():
     p = primes[random.randint(0,1000)]
     q = primes[random.randint(0,1000)]
 
+    # if the primes are equal, pick another prime until they aren't equal
     while p == q:
         q = primes[random.randint(0,1000)]
 
+    print(p, q)
+
     n = p * q
+    # phi(n) where phi is Carmichael's totient function
     phi = (p-1) * (q-1)
 
-    #find e where the gcd is greater than 1
+    # find e where the gcd is greater than 1 and e and phi is coprime
     e = random.randrange(1, phi)
     g = gcd(e, phi)
     while g != 1:
         e = random.randrange(1, phi)
         g = gcd(e, phi)
 
+    # d is the modular multiplictive inverse of e mod phi
     d = pow(e, -1, phi)
 
+    # returns the public and private key
     return ((e, n), (d, n))
 
 
-def encrypt(private_key, txt):
+def encrypt(private_key, message):
     # extract private key
     key, n = private_key
 
-    cipher = [pow(ord(char), key, n) for char in txt]
+    # convert each letter to numbers using c^e mod n where c is the letter and e and n are the private key
+    cipher = [pow(ord(char), key, n) for char in message]
 
     # Return the array of bytes
     return cipher
 
 
-def decrypt(private_key, txt):
+def decrypt(private_key, message):
     # extract private key
     key, n = private_key
 
-    aux = [str(pow(char, key, n)) for char in txt]
-
+    # convert each number using c^d mod n where c is the letter and d and n are the private key
+    aux = [str(pow(char, key, n)) for char in message]
+    # convert the bytes to characters
     plain = [chr(int(char2)) for char2 in aux]
+    # concatenate them the characters
     return ''.join(plain)
+
+# https://stackoverflow.com/questions/28254910/python-rsa-brute-force-check
+def egcd(a, b):
+    if a == 0:
+        return (b, 0, 1)
+    else:
+        g, y, x = egcd(b % a, a)
+        return (g, x - (b // a) * y, y)
+
+def modinv(a, m):
+    g, x, y = egcd(a, m)
+    if g != 1:
+        raise Exception('modular inverse does not exist')
+    else:
+        return x % m
+
+
+# https://stackoverflow.com/questions/15347174/python-finding-prime-factors
+def prime_factors(n):
+    i = 2
+    factors = []
+    while i * i <= n:
+        if n % i:
+            i += 1
+        else:
+            n //= i
+            factors.append(i)
+    if n > 1:
+        factors.append(n)
+    return factors
 
 
 if __name__ == '__main__':
-    print("Generating public/private keys")
+    choice = input("Do you want to encrypt (e) or decrypt (d)? (type 'exit' to exit): ").lower()
+    if choice == 'e':
+        print("Generating public/private keys for your RSA cypher")
 
-    public, private = generate_key_pair()
+        public, private = generate_key_pair()
+        print(f"Your public key is {public} and your private key is {private}")
 
-    print(f"Your public key is {public} and your private key is {private}")
+        message = input("Enter message to encrypt: ").lower()
+        encrypted_msg = encrypt(public, message)
+        mess = print(encrypted_msg)
 
-    message = input("Enter a message to encrypt: ")
-    encrypted_msg = encrypt(public, message)
+        print("Your encrypted message is:", ' '.join(map(lambda x: str(x), encrypted_msg)))
 
-    print("Your encrypted message is: ", ''.join(map(lambda x: str(x), encrypted_msg)))
-    print("Decrypting message with private key ", private, " . . .")
-    print("Your message is: ", decrypt(private, encrypted_msg))
+        print("Decrypting message with private key ", private, " . . .")
+        print("Your message is: ", decrypt(private, encrypted_msg))
+
+    elif choice == 'd':
+        message = input("Enter encyrpted message: ").split(" ")
+        #message = [5590016, 12411864, 3716021]
+        private_exists = input("If you have a private key, please enter (p) otherwise do not enter anything: ").lower()
+        if private_exists == "p":
+            key = input("Enter private key in the form of d n: ").lower()
+            if key:
+                d = int(key.split(" ")[0])
+                n = int(key.split(" ")[1])
+                private = (d, n)
+                print("Decrypting message with private key ", private, " . . .")
+                print("Your message is: ", decrypt(private, message))
+        else:
+            key = input("Enter the public key in the form of e n: ").lower()
+            print(message)
+            e = int(key.split(" ")[0])
+            n = int(key.split(" ")[1])
+            
+            # https://stackoverflow.com/questions/28254910/python-rsa-brute-force-check
+            p = prime_factors(n)
+            q = p[len(p)-1]
+            p = p[len(p)-2]
+            phi_n = (p-1) * (q-1)
+
+            d = modinv(e, phi_n)
+            print(f"The private key is: ({d}, {n})")
+            print("Beginning decryption")
+
+            aux = [str(pow(int(char), d, n)) for char in message]
+            # convert the bytes to characters
+            plain = [chr(int(char2)) for char2 in aux]
+            # concatenate them the characters
+            print("Your decrypted message is: ", ''.join(plain))
+    elif choice == 'exit':
+        exit()
+    else:
+        print('No choice selected, please try again')
+    
+    
