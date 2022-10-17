@@ -3,6 +3,11 @@
 # Get input from the user. 
 # User will run main from the command line and give input when asked. 
 # Encrypt or Decrypt?
+from RSA import RSA
+from Vigenere import Vigenere_Cipher
+from Vigenerev2 import Vigenere_Cipherv2
+
+
 def function():
     global enc_or_dec 
     enc_or_dec = input('\033[1m' + "Would you like to Encrypt (E) or Decrypt (D)? " + '\033[0m')
@@ -12,14 +17,14 @@ def function():
 def cipher(enc_or_dec):
     # Encryption
     if enc_or_dec == "E":
-        print("Cipher Options: " + '\033[3m' + "Vignere, ElGamel, Feistel, RSA, Caesar" + '\033[0m')
+        print("Cipher Options: " + '\033[3m' + "Vignere, ElGamal, Feistel, RSA, Caesar" + '\033[0m')
         enc_cipher = input('\033[1m' + "Which cipher would you like to use to encrypt? " + '\033[0m')
         print("")
         # Execute encrypting cipher function for relevant cipher. 
         enc_switch(enc_cipher)
     # Decryption
     elif enc_or_dec == "D":
-        print("Cipher Options: " + '\033[3m' + "Vignere, ElGamel, Feistel, RSA, Caesar" + '\033[0m')
+        print("Cipher Options: " + '\033[3m' + "Vignere, ElGamal, Feistel, RSA, Caesar" + '\033[0m')
         dec_cipher = input('\033[1m' + "Which cipher would you like to use to decrypt? " + '\033[0m')
         print("")
         # Execute decrypting cipher function for relevant cipher.
@@ -35,15 +40,17 @@ def cipher(enc_or_dec):
 def enc_switch(enc_cipher):
     if enc_cipher == "Vignere":
         print(f.renderText("Encryption Vignere"))
+        Vigenere_Cipherv2.encrypt()
         # Do something
-    elif enc_cipher == "ElGamel":
-        print(f.renderText("Encryption ElGamel"))
+    elif enc_cipher == "ElGamal":
+        print(f.renderText("Encryption ElGamal"))
         # Do something
     elif enc_cipher == "Feistel":
         print(f.renderText("Encryption Feistel"))
         # Do something
     elif enc_cipher == "RSA":
         print(f.renderText("Encryption RSA"))
+        RSA.encrypt()
         # Do something
     elif enc_cipher == "Caesar":
         print(f.renderText("Encryption Caesar"))
@@ -59,14 +66,15 @@ def dec_switch(dec_cipher):
     if dec_cipher == "Vignere":
         print(f.renderText("Decryption Vignere"))
         # Do something
-    elif dec_cipher == "ElGamel":
-        print(f.renderText("Decryption ElGamel"))
+    elif dec_cipher == "ElGamal":
+        print(f.renderText("Decryption ElGamal"))
         # Do something
     elif dec_cipher == "Feistel":
         print(f.renderText("Decryption Feistel"))
         # Do something
     elif dec_cipher == "RSA":
         print(f.renderText("Decryption RSA"))
+        RSA.decrypt()
         # Do something
     elif dec_cipher == "Caesar":
         print(f.renderText("Decryption Caesar"))
