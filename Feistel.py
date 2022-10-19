@@ -163,9 +163,8 @@ def keyReverse(right):
    return right[::-1]
 
 # Main code
-if __name__ == "__main__":
+def feistelMain():
 
-    print('This is a Feistel Cypher.')
     print('You can encrypt a message and then check that it decrypts.')
     
     message = ""

@@ -3,91 +3,89 @@ from PeriodicityFinder import calculateP
 from LetterFrequencyCalculator import calculateLetterFrequency
 from RemoveSpacesCapitals import removeSpacesCapitals
 
-class Vigenere_Cipher():
+def keyLengthAdjuster(key, messageLength):
+    lengthKey = len(key)
 
-    def keyLengthAdjuster(self, key, messageLength):
-        lengthKey = len(key)
+    if messageLength < lengthKey:
+        diff = lengthKey - messageLength
+        key = key[diff:]
+        print(key)
 
-        if messageLength < lengthKey:
-            diff = lengthKey - messageLength
-            key = key[diff:]
-            print(key)
+    elif messageLength > lengthKey:
 
-        elif messageLength > lengthKey:
+        remainder = messageLength % lengthKey
+        temp = key
 
-            remainder = messageLength % lengthKey
-            temp = key
+        while lengthKey < messageLength:
+            temp = temp + key
+            lengthKey = len(temp)
 
-            while lengthKey < messageLength:
-                temp = temp + key
-                lengthKey = len(temp)
+        key = temp
 
-            key = temp
+        if lengthKey != messageLength:
+            key = key[:messageLength]
+            lengthKey = len(key)
 
-            if lengthKey != messageLength:
-                key = key[:messageLength]
-                lengthKey = len(key)
+    return key
 
-        return key
+def vigenereEncrypt():
 
-    def encrypt(self, key, message):
-    
-        key = self.keyLengthAdjuster(key, len(message))
-        encryptedMessage = ""
-
-        for idx, i in enumerate(message):
-            messageLetterNum = ord(i) - 96
-            keyLetterNum = ord(key[idx]) - 96
-            
-            encryptedLetter = ((messageLetterNum + keyLetterNum - 1) % 26) + 96
-            if encryptedLetter == 96:
-                encryptedLetter = 122
-            encryptedMessage = encryptedMessage + chr(encryptedLetter)
+    message = input('What message do you want to encrypt?\n')
+    while (message.isalpha() == False):
+        print('Please specify only letters.')
+        message = input('What message do you want to encrypt?\n')
         
-        return encryptedMessage
+    message = removeSpacesCapitals(message)
+    key = input('What is your key?\n')
+    while (key.isalpha() == False):
+        print('Please specify only letters.')
+        message = input('What is your key?\n')
 
-    def decrypt(self, key, encryptedMessage):
+    key = keyLengthAdjuster(key, len(message))
+    encryptedMessage = ""
+
+    for idx, i in enumerate(message):
+        messageLetterNum = ord(i) - 96
+        keyLetterNum = ord(key[idx]) - 96
         
-        # Test kksoshniqrzyalrpihwlhnxdzilptketkomhnbgexukcmdjdjlhnkrppdcrvptdmrgwuoodinmxtyhjcqsvzwajegwxcrysbwatduhjaoakhknbocgoiloejppdskdbnznuvpcceewopdrghlxdrlslwsifqswqkvgevrtrqptxtyrqogikoanstyhzzhnbhnalobljoztkkamzrjikzremhnikhfxnazfkhnezrujevmynhwakepzdwgaueammlfrgqmggdhmvajeqtkivgevsokdgqmgjrimayghnkxtyhobdadskcqiejbznmlqzmqhvurquiukwqqgryabgezplzdsjlkvshrwdmqwyrhmgergsiroeiezdrrljlqogvppdszcaweblohmsskkqvceihzwmtyhyirtchsqmdfzonnruduannvqzbgecdgmqojhppdfcrsmqbvgobtrehzqmtfpqlcyjwnmzmjdjlgaxuelrplplshnjvsmklvgpwshvvehdowjwzceevdmcsfoeddrnrklreewdcrirvinnrihcckaiwnihnzqcadsjlkvrhfzaddrndovntudixdnvgsphcyzwavhpkwzqyndobnbvikcmdcdpmnnvvpwqmpvwbtruduietvujwnnriaecapvxmeoihdiklfzammrvwqzmiejpwfrpibqmdfupwveignmmcyhzbntyhoshnrqzaolrwpmqeuzebgmlgaddnrveldfiribgeidevznuzevcikkwlmtshavzhrslgorrfpqbejhoahoeinmcaegcmnrxhspnhrgxmdnjsuqmgfqppdscbppdrzqpmzmydzadeeikzshvpomkvvvppdsghalnfkkkadnvzjqlblvpentyrqaznudjlnnvvppdyihlwqtvgppztkkaakykkazhnkhwuvajqkunrvwdimsvyavfrvhjqrhsoqzrsyrkbhnxwdznuxkppdazuhqjedloahlvvwagaiuuapuvoypddrokvftyhzmreiwalboiuelnryhyilerfnwrsjrimaoubspnlfrgmcjlvpirpihkkbuglalzsyhsirnvdntxhvdztdsjqekjtyhcpnskrboqywievcoiwkedrndoasailjoloiromkyfxpweanljlnwdxpbdrzqccmdvudqrbihwbgdfqpntlwlhtshvlnzdqllnmleewopzlwdjqmcylbbgakkatkoelysrazgdiqrp
-        # CUDRYHSODBODGRZAFDNRFCRQTELCTHNVXSOHSGNNBZNSRRQHVROOCLNTWHRELHHPELNGIOEWHRPOQHRAFOZSUGHRUHWNVTUHSBQOSEEAMAZLNODBODGRDWRDLGKYYRNQRNODNXHRUHACSLVHDULSTHNVXSGRMNQYCUOOOEZVHVVIAYEAWIBQSVQCYXDRWHRVPRHDBPEGHRNQDGKEPRWPDTPKEE
+        encryptedLetter = ((messageLetterNum + keyLetterNum - 1) % 26) + 96
+        if encryptedLetter == 96:
+            encryptedLetter = 122
+        encryptedMessage = encryptedMessage + chr(encryptedLetter)
+    
+    print('Encrypted Message:')
+    print(encryptedMessage)
 
-        key = self.keyLengthAdjuster(key, len(encryptedMessage))
-        decryptedMessage = ""
+def vigenereDecrypt():
 
-        for idx, i in enumerate(encryptedMessage):
-            messageLetterNum = ord(i) - 96
-            keyLetterNum = ord(key[idx]) - 96
+    cyphertext = input('What cyphertext do you want to decrypt?\n')
+    while (cyphertext.isalpha() == False):
+        print('Please specify only letters.')
+        cyphertext = input('What cyphertext do you want to decrypt?\n')
         
-            decryptedLetter = ((messageLetterNum - keyLetterNum + 1) % 26) + 96
-            if decryptedLetter == 96:
-                decryptedLetter = 122
-            decryptedMessage = decryptedMessage + chr(decryptedLetter)
+    cyphertext = removeSpacesCapitals(cyphertext)
+    # Calculate the period
+    period = calculateP(cyphertext)
+    # Calculate the key
+    key = calculateLetterFrequency(cyphertext, period)
     
-        return decryptedMessage
-    
+    key = keyLengthAdjuster(key, len(cyphertext))
+    decryptedMessage = ""
 
-while(True):
-    choice = input("Do you want to encrypt or decrypt? (type 'exit' to exit): ").lower()
-    if choice == 'encrypt':
-        message = input("Enter message: ").lower()
-        key = input("Enter key: ").lower()
-        cipher = Vigenere_Cipher()
-        encryptedMessage = cipher.encrypt(key, removeSpacesCapitals(message))
-        print(encryptedMessage)
-    elif choice == 'decrypt':
-        message = input("Enter message: ").lower()
-        # Calculate the period
-        period = calculateP(message)
-        # Calculate the key
-        key = calculateLetterFrequency(message, period)
-        print('Key: ' + key)
-        print('Decrypted Message:')
-        cipher = Vigenere_Cipher()
-        decryptedMessage = cipher.decrypt(key, removeSpacesCapitals(message))
-        print(decryptedMessage)
-        print('')
-    elif choice == 'exit':
-        exit()
-    else:
-        print('No choice selected, please try again')
+    for idx, i in enumerate(cyphertext):
+        messageLetterNum = ord(i) - 96
+        keyLetterNum = ord(key[idx]) - 96
+    
+        decryptedLetter = ((messageLetterNum - keyLetterNum + 1) % 26) + 96
+        if decryptedLetter == 96:
+            decryptedLetter = 122
+        decryptedMessage = decryptedMessage + chr(decryptedLetter)
+
+    print('Key: ' + key)
+    print('Decrypted Message:')
+    print(decryptedMessage)
+    print('')
+
+# Test kksoshniqrzyalrpihwlhnxdzilptketkomhnbgexukcmdjdjlhnkrppdcrvptdmrgwuoodinmxtyhjcqsvzwajegwxcrysbwatduhjaoakhknbocgoiloejppdskdbnznuvpcceewopdrghlxdrlslwsifqswqkvgevrtrqptxtyrqogikoanstyhzzhnbhnalobljoztkkamzrjikzremhnikhfxnazfkhnezrujevmynhwakepzdwgaueammlfrgqmggdhmvajeqtkivgevsokdgqmgjrimayghnkxtyhobdadskcqiejbznmlqzmqhvurquiukwqqgryabgezplzdsjlkvshrwdmqwyrhmgergsiroeiezdrrljlqogvppdszcaweblohmsskkqvceihzwmtyhyirtchsqmdfzonnruduannvqzbgecdgmqojhppdfcrsmqbvgobtrehzqmtfpqlcyjwnmzmjdjlgaxuelrplplshnjvsmklvgpwshvvehdowjwzceevdmcsfoeddrnrklreewdcrirvinnrihcckaiwnihnzqcadsjlkvrhfzaddrndovntudixdnvgsphcyzwavhpkwzqyndobnbvikcmdcdpmnnvvpwqmpvwbtruduietvujwnnriaecapvxmeoihdiklfzammrvwqzmiejpwfrpibqmdfupwveignmmcyhzbntyhoshnrqzaolrwpmqeuzebgmlgaddnrveldfiribgeidevznuzevcikkwlmtshavzhrslgorrfpqbejhoahoeinmcaegcmnrxhspnhrgxmdnjsuqmgfqppdscbppdrzqpmzmydzadeeikzshvpomkvvvppdsghalnfkkkadnvzjqlblvpentyrqaznudjlnnvvppdyihlwqtvgppztkkaakykkazhnkhwuvajqkunrvwdimsvyavfrvhjqrhsoqzrsyrkbhnxwdznuxkppdazuhqjedloahlvvwagaiuuapuvoypddrokvftyhzmreiwalboiuelnryhyilerfnwrsjrimaoubspnlfrgmcjlvpirpihkkbuglalzsyhsirnvdntxhvdztdsjqekjtyhcpnskrboqywievcoiwkedrndoasailjoloiromkyfxpweanljlnwdxpbdrzqccmdvudqrbihwbgdfqpntlwlhtshvlnzdqllnmleewopzlwdjqmcylbbgakkatkoelysrazgdiqrp
+# CUDRYHSODBODGRZAFDNRFCRQTELCTHNVXSOHSGNNBZNSRRQHVROOCLNTWHRELHHPELNGIOEWHRPOQHRAFOZSUGHRUHWNVTUHSBQOSEEAMAZLNODBODGRDWRDLGKYYRNQRNODNXHRUHACSLVHDULSTHNVXSGRMNQYCUOOOEZVHVVIAYEAWIBQSVQCYXDRWHRVPRHDBPEGHRNQDGKEPRWPDTPKEE
 

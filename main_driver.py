@@ -4,9 +4,8 @@
 # User will run main from the command line and give input when asked. 
 # Encrypt or Decrypt?
 from RSA import RSA
-from Vigenere import Vigenere_Cipher
-from Vigenerev2 import Vigenere_Cipherv2
-
+from Vigenerev2 import vigenereEncrypt, vigenereDecrypt
+from Feistel import feistelMain
 
 def function():
     global enc_or_dec 
@@ -40,14 +39,13 @@ def cipher(enc_or_dec):
 def enc_switch(enc_cipher):
     if enc_cipher == "Vignere":
         print(f.renderText("Encryption Vignere"))
-        Vigenere_Cipherv2.encrypt()
-        # Do something
+        vigenereEncrypt()
     elif enc_cipher == "ElGamal":
         print(f.renderText("Encryption ElGamal"))
         # Do something
     elif enc_cipher == "Feistel":
         print(f.renderText("Encryption Feistel"))
-        # Do something
+        feistelMain()
     elif enc_cipher == "RSA":
         print(f.renderText("Encryption RSA"))
         RSA.encrypt()
@@ -65,12 +63,9 @@ def enc_switch(enc_cipher):
 def dec_switch(dec_cipher):
     if dec_cipher == "Vignere":
         print(f.renderText("Decryption Vignere"))
-        # Do something
+        vigenereDecrypt()
     elif dec_cipher == "ElGamal":
         print(f.renderText("Decryption ElGamal"))
-        # Do something
-    elif dec_cipher == "Feistel":
-        print(f.renderText("Decryption Feistel"))
         # Do something
     elif dec_cipher == "RSA":
         print(f.renderText("Decryption RSA"))
