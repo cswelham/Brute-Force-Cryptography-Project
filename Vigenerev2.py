@@ -31,7 +31,7 @@ def keyLengthAdjuster(key, messageLength):
 def vigenereEncrypt():
 
     message = input('What message do you want to encrypt?\n')
-    while (message.isalpha() == False):
+    while (any(char.isdigit() for char in message) == True):
         print('Please specify only letters.')
         message = input('What message do you want to encrypt?\n')
         
@@ -59,7 +59,7 @@ def vigenereEncrypt():
 def vigenereDecrypt():
 
     cyphertext = input('What cyphertext do you want to decrypt?\n')
-    while (cyphertext.isalpha() == False):
+    while (any(char.isdigit() for char in cyphertext) == True):
         print('Please specify only letters.')
         cyphertext = input('What cyphertext do you want to decrypt?\n')
         

@@ -16,14 +16,14 @@ def function():
 def cipher(enc_or_dec):
     # Encryption
     if enc_or_dec == "E":
-        print("Cipher Options: " + '\033[3m' + "Vignere, ElGamal, Feistel, RSA, Caesar" + '\033[0m')
+        print("Cipher Options: " + '\033[3m' + "Vigenere, ElGamal, Feistel, RSA, Caesar" + '\033[0m')
         enc_cipher = input('\033[1m' + "Which cipher would you like to use to encrypt? " + '\033[0m')
         print("")
         # Execute encrypting cipher function for relevant cipher. 
         enc_switch(enc_cipher)
     # Decryption
     elif enc_or_dec == "D":
-        print("Cipher Options: " + '\033[3m' + "Vignere, ElGamal, Feistel, RSA, Caesar" + '\033[0m')
+        print("Cipher Options: " + '\033[3m' + "Vigenere, ElGamal, Feistel, RSA, Caesar" + '\033[0m')
         dec_cipher = input('\033[1m' + "Which cipher would you like to use to decrypt? " + '\033[0m')
         print("")
         # Execute decrypting cipher function for relevant cipher.
@@ -37,7 +37,7 @@ def cipher(enc_or_dec):
  
 # Encryption Function
 def enc_switch(enc_cipher):
-    if enc_cipher == "Vignere":
+    if enc_cipher == "Vigenere":
         print(f.renderText("Encryption Vignere"))
         vigenereEncrypt()
     elif enc_cipher == "ElGamal":
@@ -61,7 +61,7 @@ def enc_switch(enc_cipher):
 
 # Decryption Function
 def dec_switch(dec_cipher):
-    if dec_cipher == "Vignere":
+    if dec_cipher == "Vigenere":
         print(f.renderText("Decryption Vignere"))
         vigenereDecrypt()
     elif dec_cipher == "ElGamal":
