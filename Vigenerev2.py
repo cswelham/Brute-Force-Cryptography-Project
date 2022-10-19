@@ -49,24 +49,22 @@ class Vigenere_Cipher():
     def decrypt(self, key, encryptedMessage):
         
         # Test kksoshniqrzyalrpihwlhnxdzilptketkomhnbgexukcmdjdjlhnkrppdcrvptdmrgwuoodinmxtyhjcqsvzwajegwxcrysbwatduhjaoakhknbocgoiloejppdskdbnznuvpcceewopdrghlxdrlslwsifqswqkvgevrtrqptxtyrqogikoanstyhzzhnbhnalobljoztkkamzrjikzremhnikhfxnazfkhnezrujevmynhwakepzdwgaueammlfrgqmggdhmvajeqtkivgevsokdgqmgjrimayghnkxtyhobdadskcqiejbznmlqzmqhvurquiukwqqgryabgezplzdsjlkvshrwdmqwyrhmgergsiroeiezdrrljlqogvppdszcaweblohmsskkqvceihzwmtyhyirtchsqmdfzonnruduannvqzbgecdgmqojhppdfcrsmqbvgobtrehzqmtfpqlcyjwnmzmjdjlgaxuelrplplshnjvsmklvgpwshvvehdowjwzceevdmcsfoeddrnrklreewdcrirvinnrihcckaiwnihnzqcadsjlkvrhfzaddrndovntudixdnvgsphcyzwavhpkwzqyndobnbvikcmdcdpmnnvvpwqmpvwbtruduietvujwnnriaecapvxmeoihdiklfzammrvwqzmiejpwfrpibqmdfupwveignmmcyhzbntyhoshnrqzaolrwpmqeuzebgmlgaddnrveldfiribgeidevznuzevcikkwlmtshavzhrslgorrfpqbejhoahoeinmcaegcmnrxhspnhrgxmdnjsuqmgfqppdscbppdrzqpmzmydzadeeikzshvpomkvvvppdsghalnfkkkadnvzjqlblvpentyrqaznudjlnnvvppdyihlwqtvgppztkkaakykkazhnkhwuvajqkunrvwdimsvyavfrvhjqrhsoqzrsyrkbhnxwdznuxkppdazuhqjedloahlvvwagaiuuapuvoypddrokvftyhzmreiwalboiuelnryhyilerfnwrsjrimaoubspnlfrgmcjlvpirpihkkbuglalzsyhsirnvdntxhvdztdsjqekjtyhcpnskrboqywievcoiwkedrndoasailjoloiromkyfxpweanljlnwdxpbdrzqccmdvudqrbihwbgdfqpntlwlhtshvlnzdqllnmleewopzlwdjqmcylbbgakkatkoelysrazgdiqrp
+        # CUDRYHSODBODGRZAFDNRFCRQTELCTHNVXSOHSGNNBZNSRRQHVROOCLNTWHRELHHPELNGIOEWHRPOQHRAFOZSUGHRUHWNVTUHSBQOSEEAMAZLNODBODGRDWRDLGKYYRNQRNODNXHRUHACSLVHDULSTHNVXSGRMNQYCUOOOEZVHVVIAYEAWIBQSVQCYXDRWHRVPRHDBPEGHRNQDGKEPRWPDTPKEE
 
-        if key is not None:
-            key = self.keyLengthAdjuster(key, len(encryptedMessage))
-            decryptedMessage = ""
+        key = self.keyLengthAdjuster(key, len(encryptedMessage))
+        decryptedMessage = ""
 
-            for idx, i in enumerate(encryptedMessage):
-                messageLetterNum = ord(i) - 96
-                keyLetterNum = ord(key[idx]) - 96
-            
-                decryptedLetter = ((messageLetterNum - keyLetterNum + 1) % 26) + 96
-                if decryptedLetter == 96:
-                    decryptedLetter = 122
-                decryptedMessage = decryptedMessage + chr(decryptedLetter)
+        for idx, i in enumerate(encryptedMessage):
+            messageLetterNum = ord(i) - 96
+            keyLetterNum = ord(key[idx]) - 96
         
-            return decryptedMessage
-        else:
-            print('not implemented')
-        
+            decryptedLetter = ((messageLetterNum - keyLetterNum + 1) % 26) + 96
+            if decryptedLetter == 96:
+                decryptedLetter = 122
+            decryptedMessage = decryptedMessage + chr(decryptedLetter)
+    
+        return decryptedMessage
+    
 
 while(True):
     choice = input("Do you want to encrypt or decrypt? (type 'exit' to exit): ").lower()

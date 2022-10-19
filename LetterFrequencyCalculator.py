@@ -61,11 +61,12 @@ def calculateLetterFrequency(message, period):
             for i in range(len(list(alphabetFrequency.keys()))):
                 prob = 0
                 if keys[i] in stringDict:
-                    prob = stringDict[keys[i]] /26 
+                    prob = stringDict[keys[i]] / len(stringDict.keys())
                 chisquare = chisquare + ((prob - values[i])**2 / values[i])
             chiScores.append(chisquare)
 
         # Choose letter that minimizes chisquare
+        print(chiScores)
         minIndex = min(range(len(chiScores)), key=chiScores.__getitem__)
         key = key + keys[minIndex]
 
