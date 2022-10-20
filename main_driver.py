@@ -6,6 +6,9 @@
 from RSA import RSA
 from Vigenerev2 import vigenereEncrypt, vigenereDecrypt
 from Feistel import feistelMain
+from MasseyOmura import encodeMO,decodeMO
+from ElGamal import encodeElGamal,decodeElGamal
+from CaesarCipher import caesarEncrypt,caesarDecrypt
 
 def function():
     global enc_or_dec 
@@ -16,14 +19,14 @@ def function():
 def cipher(enc_or_dec):
     # Encryption
     if enc_or_dec == "E":
-        print("Cipher Options: " + '\033[3m' + "Vigenere, ElGamal, Feistel, RSA, Caesar" + '\033[0m')
+        print("Cipher Options: " + '\033[3m' + "Vigenere, ElGamal, Feistel, RSA, Massey Omura, Caesar" + '\033[0m')
         enc_cipher = input('\033[1m' + "Which cipher would you like to use to encrypt? " + '\033[0m')
         print("")
         # Execute encrypting cipher function for relevant cipher. 
         enc_switch(enc_cipher)
     # Decryption
     elif enc_or_dec == "D":
-        print("Cipher Options: " + '\033[3m' + "Vigenere, ElGamal, Feistel, RSA, Caesar" + '\033[0m')
+        print("Cipher Options: " + '\033[3m' + "Vigenere, ElGamal, Feistel, RSA, Massey Omura, Caesar" + '\033[0m')
         dec_cipher = input('\033[1m' + "Which cipher would you like to use to decrypt? " + '\033[0m')
         print("")
         # Execute decrypting cipher function for relevant cipher.
@@ -42,7 +45,10 @@ def enc_switch(enc_cipher):
         vigenereEncrypt()
     elif enc_cipher == "ElGamal":
         print(f.renderText("Encryption ElGamal"))
-        # Do something
+        encodeElGamal()
+    elif enc_cipher == "Massey Omura":
+        print(f.renderText("Encryption Massey Omura"))
+        encodeMO()
     elif enc_cipher == "Feistel":
         print(f.renderText("Encryption Feistel"))
         feistelMain()
@@ -52,7 +58,7 @@ def enc_switch(enc_cipher):
         # Do something
     elif enc_cipher == "Caesar":
         print(f.renderText("Encryption Caesar"))
-        # Do something
+        caesarEncrypt()
     # INPUT NOT VALID...
     else:
         print("Please provide a valid input...")
@@ -66,14 +72,17 @@ def dec_switch(dec_cipher):
         vigenereDecrypt()
     elif dec_cipher == "ElGamal":
         print(f.renderText("Decryption ElGamal"))
-        # Do something
+        decodeElGamal()
+    elif dec_cipher == "Massey Omura":
+        print(f.renderText("Decryption Massey Omura"))
+        decodeMO()
     elif dec_cipher == "RSA":
         print(f.renderText("Decryption RSA"))
         RSA.decrypt()
         # Do something
     elif dec_cipher == "Caesar":
         print(f.renderText("Decryption Caesar"))
-        # Do something
+        caesarDecrypt()
     # INPUT NOT VALID...
     else:
         print("Please provide a valid input...")
