@@ -1,9 +1,6 @@
 from base64 import decode
 import string
 
-
-global alphabet 
-
 #function gets the most common letter present in the dictionary
 def getMostCommonLetter(dict): 
      #make a list of the dictionary values in order
@@ -17,7 +14,12 @@ def getMostCommonLetter(dict):
 def caesarEncrypt():
     # get the plaintext and shift
     file = input("Please Enter The Plain Text Location: ")
-    shift = input("Please Enter The Shift Value: ")
+    shift = input("Please Enter A Shift Value from 1 to 26: ")
+    while(True):
+        if(shift>"0" and shift<"27"):
+            break
+        shift = input("Invalid Input, Please Enter A Shift Value from 1 to 26: ")
+
 
     #open file and remove all whitespace and capitals
     f = open(file, "r")
@@ -36,10 +38,11 @@ def caesarEncrypt():
     #print the encoded text
     print("Encoded Text:")
     print(output)
+    return
 
 #function decryptes a caesar cipher encoded text
 def caesarDecrypt():
-    global alphabet
+    alphabet = dict.fromkeys(string.ascii_lowercase, 0)
     #get the cipher text location
     file = input("Please Enter The Cipher Text Location: ")
     
@@ -54,7 +57,7 @@ def caesarDecrypt():
         if(choice == "y"):
             #decrypt the text using the key
             decryptWithKey(text)
-            break
+            return
         elif(choice=="n"):
             #the user doesnt have the key so continue
             break
@@ -105,10 +108,11 @@ def decryptWithKey(cipherText):
             decodedChar = (int(ord(cipherText[i])) -97 -key) %26
             decodedChar +=97
             output += chr(decodedChar)
+    print("\nDecoded Text is:")
+    print(output)
 
-
-
-#takes a text file as input: either plaintext or caesar cipher encrypted 
+"""
+takes a text file as input: either plaintext or caesar cipher encrypted 
 
 #set up the dictionary to store frequency counts
 alphabet = dict.fromkeys(string.ascii_lowercase, 0)
@@ -129,3 +133,4 @@ while True:
     else:
         #invalid - get input again
         choice = input("Please enter E/e for encryption or enter D/d for decryption: ")
+"""
