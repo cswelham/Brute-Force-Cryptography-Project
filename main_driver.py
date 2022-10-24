@@ -55,7 +55,6 @@ def enc_switch(enc_cipher):
     elif enc_cipher == "RSA":
         print(f.renderText("Encryption RSA"))
         RSA.encrypt()
-        # Do something
     elif enc_cipher == "Caesar":
         print(f.renderText("Encryption Caesar"))
         caesarEncrypt()

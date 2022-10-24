@@ -3,17 +3,18 @@ from PeriodicityFinder import calculateP
 from LetterFrequencyCalculator import calculateLetterFrequency
 from RemoveSpacesCapitals import removeSpacesCapitals
 
+#increases or decreases the size of the key to match the message length
 def keyLengthAdjuster(key, messageLength):
     lengthKey = len(key)
 
+    #decreases key length
     if messageLength < lengthKey:
         diff = lengthKey - messageLength
         key = key[diff:]
         print(key)
 
+    #increases key length
     elif messageLength > lengthKey:
-
-        remainder = messageLength % lengthKey
         temp = key
 
         while lengthKey < messageLength:
@@ -28,6 +29,7 @@ def keyLengthAdjuster(key, messageLength):
 
     return key
 
+#encrypts a message using a key the user provides
 def vigenereEncrypt():
 
     message = input('What message do you want to encrypt?\n')
@@ -39,18 +41,23 @@ def vigenereEncrypt():
     key = input('What is your key?\n')
     while (key.isalpha() == False):
         print('Please specify only letters.')
-        message = input('What is your key?\n')
+        key = input('What is your key?\n')
 
     key = keyLengthAdjuster(key, len(message))
     encryptedMessage = ""
 
+    #iterates over the message and encrypts each letter
     for idx, i in enumerate(message):
+        #converts each letter to a number
         messageLetterNum = ord(i) - 96
+        #converts the key to a number
         keyLetterNum = ord(key[idx]) - 96
         
+        #using the key, encrypts a letter
         encryptedLetter = ((messageLetterNum + keyLetterNum - 1) % 26) + 96
         if encryptedLetter == 96:
             encryptedLetter = 122
+        #adds the encrypted letter to the encrypted message
         encryptedMessage = encryptedMessage + chr(encryptedLetter)
     
     print('Encrypted Message:')
@@ -69,16 +76,22 @@ def vigenereDecrypt():
     # Calculate the key
     key = calculateLetterFrequency(cyphertext, period)
     
+    #adjusts the key length
     key = keyLengthAdjuster(key, len(cyphertext))
     decryptedMessage = ""
 
+    #encrypts the message
     for idx, i in enumerate(cyphertext):
+        #converts each letter to a number
         messageLetterNum = ord(i) - 96
+        #converts the key to a number
         keyLetterNum = ord(key[idx]) - 96
     
+        #using the key, decrypts a letter
         decryptedLetter = ((messageLetterNum - keyLetterNum + 1) % 26) + 96
         if decryptedLetter == 96:
             decryptedLetter = 122
+        #adds the decrypted letter to the message
         decryptedMessage = decryptedMessage + chr(decryptedLetter)
 
     print('Key: ' + key)
