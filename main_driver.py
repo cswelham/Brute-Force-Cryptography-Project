@@ -78,7 +78,6 @@ def dec_switch(dec_cipher):
     elif dec_cipher == "RSA":
         print(f.renderText("Decryption RSA"))
         RSA.decrypt()
-        # Do something
     elif dec_cipher == "Caesar":
         print(f.renderText("Decryption Caesar"))
         caesarDecrypt()
