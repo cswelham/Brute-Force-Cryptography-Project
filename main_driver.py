@@ -3,7 +3,7 @@
 # Get input from the user. 
 # User will run main from the command line and give input when asked. 
 # Encrypt or Decrypt?
-from RSA import RSA
+from RSA import RSAencrypt, RSAdecrypt
 from Vigenerev2 import vigenereEncrypt, vigenereDecrypt
 from Feistel import feistelMain
 from MasseyOmura import encodeMO,decodeMO
@@ -54,7 +54,7 @@ def enc_switch(enc_cipher):
         feistelMain()
     elif enc_cipher == "RSA":
         print(f.renderText("Encryption RSA"))
-        RSA.encrypt()
+        RSAencrypt()
         # Do something
     elif enc_cipher == "Caesar":
         print(f.renderText("Encryption Caesar"))
@@ -78,7 +78,7 @@ def dec_switch(dec_cipher):
         decodeMO()
     elif dec_cipher == "RSA":
         print(f.renderText("Decryption RSA"))
-        RSA.decrypt()
+        RSAdecrypt()
         # Do something
     elif dec_cipher == "Caesar":
         print(f.renderText("Decryption Caesar"))
