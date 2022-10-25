@@ -26,7 +26,7 @@ def cipher(enc_or_dec):
         enc_switch(enc_cipher)
     # Decryption
     elif enc_or_dec == "D":
-        print("Cipher Options: " + '\033[3m' + "Vigenere, ElGamal, Feistel, RSA, Massey Omura, Caesar" + '\033[0m')
+        print("Cipher Options: " + '\033[3m' + "Vigenere, ElGamal, RSA, Massey Omura, Caesar" + '\033[0m')
         dec_cipher = input('\033[1m' + "Which cipher would you like to use to decrypt? " + '\033[0m')
         print("")
         # Execute decrypting cipher function for relevant cipher.

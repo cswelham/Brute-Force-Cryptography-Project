@@ -66,7 +66,6 @@ def calculateLetterFrequency(message, period):
             chiScores.append(chisquare)
 
         # Choose letter that minimizes chisquare
-        print(chiScores)
         minIndex = min(range(len(chiScores)), key=chiScores.__getitem__)
         key = key + keys[minIndex]
 

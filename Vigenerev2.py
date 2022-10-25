@@ -75,6 +75,9 @@ def vigenereDecrypt():
     period = calculateP(cyphertext)
     # Calculate the key
     key = calculateLetterFrequency(cyphertext, period)
+
+    print('Calculated Period: ' + str(period))
+    print('Calculated Key with Chi-Square Test: ' + key)
    
     #adjusts the key length
     key = keyLengthAdjuster(key, len(cyphertext))
@@ -93,8 +96,7 @@ def vigenereDecrypt():
             decryptedLetter = 122
         #adds the decrypted letter to the message
         decryptedMessage = decryptedMessage + chr(decryptedLetter)
- 
-    print('Key: ' + key)
+
     print('Decrypted Message:')
     print(decryptedMessage)
     print('')
