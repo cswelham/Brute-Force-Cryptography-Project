@@ -168,52 +168,47 @@ def feistelMain():
     print('You can encrypt a message and then check that it decrypts.')
     
     message = ""
-    # While user is still wants to use program
-    while (message != "EXIT"):
-        message = input('What message do you want to encrypt? Or type EXIT to leave\n')
-        
-        if message == "EXIT":
-            exit()
-
-        # Check for valid input    
-        valid = False
-        while not valid:
-            valid = True
-            for item in message:
-                if item not in {'0','1'}:
-                    valid = False
-                    break
-            if len(message)%2 != 0:
+    message = input('What message do you want to encrypt? Or type EXIT to leave\n')
+    
+    # Check for valid input    
+    valid = False
+    while not valid:
+        valid = True
+        for item in message:
+            if item not in {'0','1'}:
                 valid = False
-            if not valid:
-                print('Please specify only ones and zeroes of an even length.')
-                message = input('What message do you want to encrypt?\n')
+                break
+        if len(message)%2 != 0:
+            valid = False
+        if not valid:
+            print('Please specify only ones and zeroes of an even length.')
+            message = input('What message do you want to encrypt?\n')
 
-                if message == "EXIT":
-                    exit()
-                    
-        # Get number of rounds
+            if message == "EXIT":
+                exit()
+                
+    # Get number of rounds
+    rounds = input('What is your number of rounds?\n')
+    while (rounds.isdigit() == False and rounds >= 1):
+        print('Please specify a number.')
         rounds = input('What is your number of rounds?\n')
-        while (rounds.isdigit() == False and rounds >= 1):
-            print('Please specify a number.')
-            rounds = input('What is your number of rounds?\n')
 
-        # Generate array of keys
-        keys = generateKeys(str(message), int(rounds))
+    # Generate array of keys
+    keys = generateKeys(str(message), int(rounds))
 
-        # Print result
-        encrypt = encryptFeistel(str(message), int(rounds), keys)
-        print('')
-        print('Encrypted Message:')
-        print(encrypt)
-        print('')
+    # Print result
+    encrypt = encryptFeistel(str(message), int(rounds), keys)
+    print('')
+    print('Encrypted Message:')
+    print(encrypt)
+    print('')
 
-        # Decrypt message
-        decrypt = decryptFeistel(str(encrypt), int(rounds), keys[::-1])
-        print('')
-        print('Decrypted Message:')
-        print(decrypt)
-        print('')
+    # Decrypt message
+    decrypt = decryptFeistel(str(encrypt), int(rounds), keys[::-1])
+    print('')
+    print('Decrypted Message:')
+    print(decrypt)
+    print('')
             
         
     

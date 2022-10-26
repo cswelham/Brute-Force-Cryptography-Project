@@ -28,16 +28,17 @@ def calculateLetterFrequency(message, period):
         index += 1
 
     key = ''
+    #array = [array[8]]
     # Loop through columns
     for column in array:
         chiScores = []
         # Loop through possible shifts
-        for shift in range(1, 27):
+        for shift in range(0, 26):
             # Shift the column
             newColumn = column
             for letter in column:
                 indexLetter = list(alphabetFrequency.keys()).index(letter)
-                indexLetter = indexLetter + shift
+                indexLetter = indexLetter - shift
                 if indexLetter > 25:
                     indexLetter = indexLetter - 26
                 elif indexLetter < 0:
@@ -64,13 +65,12 @@ def calculateLetterFrequency(message, period):
                     prob = stringDict[keys[i]] / len(stringDict.keys())
                 chisquare = chisquare + ((prob - values[i])**2 / values[i])
             chiScores.append(chisquare)
-
+        
         # Choose letter that minimizes chisquare
-        print(chiScores)
         minIndex = min(range(len(chiScores)), key=chiScores.__getitem__)
         key = key + keys[minIndex]
 
-    return key[::-1]
+    return key
                     
                 
                 
