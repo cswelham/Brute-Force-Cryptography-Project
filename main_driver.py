@@ -4,7 +4,7 @@
 # User will run main from the command line and give input when asked. 
 # Encrypt or Decrypt?
 from RSA import RSAencrypt, RSAdecrypt
-from Vigenerev2 import vigenereEncrypt, vigenereDecrypt
+from Vigenere import vigenereEncrypt, vigenereDecrypt
 from Feistel import feistelMain
 from MasseyOmura import encodeMO,decodeMO
 from ElGamal import encodeElGamal,decodeElGamal
