@@ -3,11 +3,12 @@
 # Get input from the user. 
 # User will run main from the command line and give input when asked. 
 # Encrypt or Decrypt?
-from RSA import RSAencrypt, RSAdecrypt
-from Vigenere import vigenereEncrypt, vigenereDecrypt
+
+from RSA import RSA
+from Vigenerev2 import vigenereEncrypt, vigenereDecrypt
 from Feistel import feistelMain
-from MasseyOmura import encodeMO,decodeMO
-from ElGamal import encodeElGamal,decodeElGamal
+from MasseyOmura import encryptMO,decryptMO
+from ElGamal import encryptElGamal,decryptElGamal
 from CaesarCipher import caesarEncrypt,caesarDecrypt
 
 def function():
@@ -26,7 +27,7 @@ def cipher(enc_or_dec):
         enc_switch(enc_cipher)
     # Decryption
     elif enc_or_dec == "D":
-        print("Cipher Options: " + '\033[3m' + "Vigenere, ElGamal, RSA, Massey Omura, Caesar" + '\033[0m')
+        print("Cipher Options: " + '\033[3m' + "Vigenere, ElGamal, Feistel, RSA, Massey Omura, Caesar" + '\033[0m')
         dec_cipher = input('\033[1m' + "Which cipher would you like to use to decrypt? " + '\033[0m')
         print("")
         # Execute decrypting cipher function for relevant cipher.
@@ -45,16 +46,17 @@ def enc_switch(enc_cipher):
         vigenereEncrypt()
     elif enc_cipher == "ElGamal":
         print(f.renderText("Encryption ElGamal"))
-        encodeElGamal()
+        encryptElGamal()
     elif enc_cipher == "Massey Omura":
         print(f.renderText("Encryption Massey Omura"))
-        encodeMO()
+        encryptMO()
     elif enc_cipher == "Feistel":
         print(f.renderText("Encryption Feistel"))
         feistelMain()
     elif enc_cipher == "RSA":
         print(f.renderText("Encryption RSA"))
-        RSAencrypt()
+        RSA.encrypt()
+        # Do something
     elif enc_cipher == "Caesar":
         print(f.renderText("Encryption Caesar"))
         caesarEncrypt()
@@ -71,13 +73,14 @@ def dec_switch(dec_cipher):
         vigenereDecrypt()
     elif dec_cipher == "ElGamal":
         print(f.renderText("Decryption ElGamal"))
-        decodeElGamal()
+        decryptElGamal()
     elif dec_cipher == "Massey Omura":
         print(f.renderText("Decryption Massey Omura"))
-        decodeMO()
+        decryptMO()
     elif dec_cipher == "RSA":
         print(f.renderText("Decryption RSA"))
-        RSAdecrypt()
+        RSA.decrypt()
+        # Do something
     elif dec_cipher == "Caesar":
         print(f.renderText("Decryption Caesar"))
         caesarDecrypt()
