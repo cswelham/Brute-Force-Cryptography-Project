@@ -1,25 +1,25 @@
 #function takes input from both parties and the prime to determine the message sequence
-def encodeMO():
+def encryptMO():
     while(True):
         try:
             prime = int(input("What is the Prime: "))
-            sSecret = int(input("What is the secret number: Sender ")) # get the secret number for the sender
+            u = int(input("What is the u: ")) # get the secret number for the sender
             _p = prime-1
-            inverseSecretS = pow(sSecret, _p-1, _p) # calculate the inverse of K modulo the prime 
-            rSecret = int(input("What is the secret number: Reciever ")) # get the secret number for the sender
-            inverseSecretR = pow(rSecret, _p-1, _p) # calculate the inverse of K modulo the prime
+            inverseU = pow(u, _p-1, _p) # calculate the inverse of K modulo the prime-1
+            v = int(input("What is the v: ")) # get the secret number for the sender
+            inverseV = pow(v, _p-1, _p) # calculate the inverse of K modulo the prime-1
             
-            message = int(input("What is the secret message: Sender ")) # get the secret message
+            message = int(input("What is the message: Sender ")) # get the secret message
 
             
+            #calculate the messages 
+            y1 = (message ** u) % prime
+            y2 =(y1 ** v) % prime
+            y3 = (y2 ** inverseU) % prime
+            y4 = (y3 ** inverseV) % prime
             
-            y1 = (message ** sSecret) % prime
-            y2 =(y1 ** rSecret) % prime
-            y3 = (y2 ** inverseSecretS) % prime
-            y4 = (y3 ** inverseSecretR) % prime
-
-            yx = (((message ** sSecret) % prime) ** inverseSecretS ) %prime
-            
+            #prints out all the messages 
+            # y4 should equal message
             print("y1:" + str(y1))
             print("y2:" + str(y2))
             print("y3:" + str(y3))
@@ -28,14 +28,14 @@ def encodeMO():
         except:
             print("Invalid Input Please Try Again")
 
-#function takes the three message values and outputs the message
-def decodeMO():
+#function takes the three transmitted values and outputs the message
+def decryptMO():
     while(True):
         try:
             prime = int(input("What is the Prime: "))
-            value1 = int(input("What is the Y1: ")) #Message encoded with sender's private number
-            value2 =  int(input("What is the Y2: ")) # Message encoded with sender and reciever private number
-            value3 =  int(input("What is the Y3: ")) # Message encoded with the reciever's private number
+            value1 = int(input("What is the Y1: ")) #Message encrypted with sender's private number
+            value2 =  int(input("What is the Y2: ")) # Message encrypted with sender and reciever private number
+            value3 =  int(input("What is the Y3: ")) # Message encrypted with the reciever's private number
             
             
             bases1 = []
@@ -66,25 +66,3 @@ def decodeMO():
         except:
             print("Invalid Input Please Try Again")
 
-"""
-
-#prime = int(input("What is the Prime: "))
-
-choice  = input("MasseyOmura: Would you like to encrypt (E) or decrypt (D)? ").lower()
-while True:
-    #if user wants to encrypt
-    if(choice == "e"):
-        #call encryption method
-        encodeMO()# used to encode a message
-        break
-    #user wants to decrypt
-    elif(choice =="d"):
-        #call decryption method
-        decodeMO() # used to decode a message
-        break 
-    else:
-        #invalid - get input again
-        choice = input("Please enter E/e for encryption or enter D/d for decryption: ")
-
-
-"""
