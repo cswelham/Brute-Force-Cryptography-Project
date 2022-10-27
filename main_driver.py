@@ -55,7 +55,6 @@ def enc_switch(enc_cipher):
     elif enc_cipher == "RSA":
         print(f.renderText("Encryption RSA"))
         RSAencrypt()
-        # Do something
     elif enc_cipher == "Caesar":
         print(f.renderText("Encryption Caesar"))
         caesarEncrypt()
@@ -79,7 +78,6 @@ def dec_switch(dec_cipher):
     elif dec_cipher == "RSA":
         print(f.renderText("Decryption RSA"))
         RSAdecrypt()
-        # Do something
     elif dec_cipher == "Caesar":
         print(f.renderText("Decryption Caesar"))
         caesarDecrypt()
