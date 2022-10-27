@@ -30,9 +30,9 @@ def encryptElGamal():
             Km = (K*message) %prime # determine Km
             
             #output the values, for debugging
-            print("K: "+str(K))
-            print("a^k: "+str(ak))
-            print("Km: "+str(Km))
+            #print("K: "+str(K))
+            #print("a^k: "+str(ak))
+            #print("Km: "+str(Km))
 
             #output the pair of values for the cipher text
             print("Cipher Text: (" + str(ak) +", "+ str(Km)+ ")")
@@ -62,17 +62,18 @@ def decryptElGamal():
                     privateNum=i+1 # index value is the private value of the receiver
                     break
 
-            print("receiver Private k:" + str(privateNum))
+            print("Receiver Private k: " + str(privateNum))
             
             K = (ak **privateNum) % prime
 
-            print("K: "+ str(K))  #print the value of K, for debugging
             inverseK = pow(K, prime-2, prime) # calculate the inverse of K modulo the prime 
 
             # inverse calculation based on https://stackoverflow.com/questions/4798654/modular-multiplicative-inverse-function-in-python
             
-            print("K^-1: "+str(inverseK)) #print the value of K inverse, for debugging
-        
+            #For debugging
+            #print("K: "+ str(K))  #print the value of K
+            #print("K^-1: "+str(inverseK)) #print the value of K inverse
+            
             message = (inverseK * Km) % prime  # use K inverse to decrypt the message
         
             print("Original Message is: "+str(message))  #print the decrypted message
