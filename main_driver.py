@@ -5,7 +5,7 @@
 # Encrypt or Decrypt?
 
 from RSA import RSA
-from Vigenerev2 import vigenereEncrypt, vigenereDecrypt
+from Vigenere import vigenereEncrypt, vigenereDecrypt
 from Feistel import feistelMain
 from MasseyOmura import encryptMO,decryptMO
 from ElGamal import encryptElGamal,decryptElGamal
