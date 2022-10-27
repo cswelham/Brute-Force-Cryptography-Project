@@ -131,8 +131,10 @@ def RSAdecrypt():
 
         # https://stackoverflow.com/questions/28254910/python-rsa-brute-force-check
         p = prime_factors(n)
+        print(f"The prime factors of {n} are {p}")
         q = p[len(p)-1]
         p = p[len(p)-2]
+        print(f"p is {p} and q is {q}")
         phi_n = (p-1) * (q-1)
 
         d = modinv(e, phi_n)
