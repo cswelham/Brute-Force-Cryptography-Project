@@ -93,6 +93,18 @@ def run():
     function()
     # What cipher do we use? (also calls function to execute cipher)
     cipher(enc_or_dec)
+    # Do you want to run the program again?
+    again = input('\033[1m' + "Did you want to run another encryption or decryption? (Y/N) " + '\033[0m')
+    if again == "Y" or again == "y":
+        run()
+    else:
+        thanks = Figlet(font = 'slant')
+        print(thanks.renderText('Thanks for using our program!'))
+        print(thanks.renderText('by Courtney, Connor, Reece, Bevan'))
+        print('')
+        bye = Figlet(font = 'speed')
+        print(bye.renderText('Bye...'))
+        print('')
 
 # Required importing of libraries.
 import sys
@@ -112,16 +124,3 @@ print(f.renderText('Group Project'))
 print("\n")
 
 run()
-
-again = input('\033[1m' + "Did you want to run another encryption or decryption? (Y/N) " + '\033[0m')
-
-if again == "Y" or again == "y":
-    run()
-else:
-    thanks = Figlet(font = 'slant')
-    print(thanks.renderText('Thanks for using our program!'))
-    print(thanks.renderText('by Courtney, Connor, Reece, Bevan'))
-    print('')
-    bye = Figlet(font = 'speed')
-    print(bye.renderText('Bye...'))
-    print('')
