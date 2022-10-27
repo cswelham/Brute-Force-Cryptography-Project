@@ -9,7 +9,7 @@ def encryptMO():
             v = int(input("What is the v: ")) # get the secret number for the sender
             inverseV = pow(v, _p-1, _p) # calculate the inverse of K modulo the prime-1
             
-            message = int(input("What is the message: Sender ")) # get the secret message
+            message = int(input("What is the message: ")) # get the secret message
 
             
             #calculate the messages 
