@@ -12,8 +12,8 @@ def discreteLogFunc(prime,base):
 
     return discreteLogs
 
-#function encodes an input message with input secret k and public key of receiver
-def encodeElGamal():
+#function encrypts an input message with input secret k and public key of receiver
+def encryptElGamal():
     while(True):
         try:
             prime = int(input("What is the Prime Number: ")) # get the prime for the system
@@ -31,18 +31,18 @@ def encodeElGamal():
             
             #output the values, for debugging
             print("K: "+str(K))
-            print("ak: "+str(ak))
+            print("a^k: "+str(ak))
             print("Km: "+str(Km))
 
             #output the pair of values for the cipher text
-            print("Cipher Text: " + str(ak) +", "+ str(Km))
+            print("Cipher Text: (" + str(ak) +", "+ str(Km)+ ")")
             return
         except:
             print("Invalid Input Please Try Again")
 
 
-#function decodes an encoded message
-def decodeElGamal():
+#function decrypts an encrypted message
+def decryptElGamal():
     while(True):
         try:
             prime = int(input("What is the Prime Number: ")) # get the prime for the system
@@ -67,7 +67,9 @@ def decodeElGamal():
             K = (ak **privateNum) % prime
 
             print("K: "+ str(K))  #print the value of K, for debugging
-            inverseK = pow(K, prime-2, prime) # calculate the inverse of K modulo the prime
+            inverseK = pow(K, prime-2, prime) # calculate the inverse of K modulo the prime 
+
+            # inverse calculation based on https://stackoverflow.com/questions/4798654/modular-multiplicative-inverse-function-in-python
             
             print("K^-1: "+str(inverseK)) #print the value of K inverse, for debugging
         
@@ -77,33 +79,3 @@ def decodeElGamal():
             return
         except:
             print("Invalid Input Please Try Again")
-
-
-
-"""
-prime = int(input("What is the Prime Number: ")) # get the prime for the system
-base = int(input("What is the Base Number: ")) # get the base for the system
-
-discreteLogs = discreteLogFunc() # populate the log table
-
-
-choice  = input("ElGamal: Would you like to encrypt (E) or decrypt (D)? ").lower()
-while True:
-    #if user wants to encrypt
-    if(choice == "e"):
-        #call encryption method
-        encodeElGamal()# used to encode a message
-        break
-    #user wants to decrypt
-    elif(choice =="d"):
-        #call decryption method
-        decodeElGamal() # used to decode a message
-        break 
-    else:
-        #invalid - get input again
-        choice = input("Please enter E/e for encryption or enter D/d for decryption: ")
-"""
-
-
-
-
