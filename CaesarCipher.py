@@ -12,33 +12,40 @@ def getMostCommonLetter(dict):
 
 #function encrypts plaintext using caesar cipher method
 def caesarEncrypt():
-    # get the plaintext and shift
-    file = input("Please Enter The Plain Text Location: ")
-    shift = input("Please Enter A Shift Value from 1 to 26: ")
-    while(True):
-        if(shift>"0" and shift<"27"):
-            break
-        shift = input("Invalid Input, Please Enter A Shift Value from 1 to 26: ")
+    try:
+
+        # get the plaintext and shift
+        file = input("Please Enter The Plain Text Location: ")
+        shift = int(input("Please Enter A Shift Value from 1 to 26: "))
+        while(True):
+            if(shift>0 and shift<27):
+                break
+            shift = int(input("Invalid Input, Please Enter A Shift Value from 1 to 26: "))
 
 
-    #open file and remove all whitespace and capitals
-    f = open(file, "r")
-    text = f.read().replace(" ", "").lower()
- 
-    output = "" 
-    #for each character in the plaintext
-    for i in range(len(text)):
-        #determine the new character mod 26
-        encodedChar = (int(ord(text[i])) -97 +int(shift)) %26
-        # adjust the character to ascii 
-        encodedChar +=97
-        #add the encoded char to output
-        output += chr(encodedChar)
+        #open file and remove all whitespace and capitals
+        f = open(file, "r")
+        text = f.read().replace(" ", "").lower()
     
-    #print the encoded text
-    print("Encoded Text:")
-    print(output)
-    return
+        output = "" 
+        #for each character in the plaintext
+        for i in range(len(text)):
+            #determine the new character mod 26
+            encodedChar = (int(ord(text[i])) -97 +int(shift)) %26
+            # adjust the character to ascii 
+            encodedChar +=97
+            #add the encoded char to output
+            output += chr(encodedChar)
+        
+        #print the encoded text
+        print("Encoded Text:")
+        print(output)
+        return
+    
+    except:
+        print("Invalid input, please try again")
+        caesarEncrypt()
+        
 
 #function decryptes a caesar cipher encoded text
 def caesarDecrypt():
